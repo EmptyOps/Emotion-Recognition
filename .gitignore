@@ -9,6 +9,9 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+# Ignore folder named start with '__'
+__*
+
 # Windows Installer files
 *.cab
 *.msi

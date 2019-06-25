@@ -2,14 +2,14 @@ import cv2
 import numpy as np
 from keras.models import load_model
 
-classifier = load_model('face_model.h5')
+classifier = load_model('weights/face_model.h5')
 emotion_dict = {'0':'angry','1':'disgust','2':'fear','3':'happy','4':'sad','5':'surprise','6':'neutral'}
 
-cascPath = "haarcascade_frontalface_default.xml"
+cascPath = "haar-classifier/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
 #video_capture = cv2.VideoCapture(0)
-video_capture = cv2.VideoCapture("ronaldo.mp4")
+video_capture = cv2.VideoCapture("A_Beautiful_Mind_2_smile_h_nm_np1_fr_goo_2.mp4")     #("A_Beautiful_Mind_2_smile_h_nm_np1_fr_goo_2.mp4")  #("ronaldo.mp4")
 disp_emotion = None
 skip = 0
 while video_capture.isOpened():
@@ -26,6 +26,10 @@ while video_capture.isOpened():
     )
 
     # Draw a rectangle around the faces
+    print( "shpes " )
+    print( small_frame.shape )
+    print( gray.shape )
+    print( faces )
     for (x, y, w, h) in faces:
         face = small_frame[y:y+h,x:x+w ,:]
         face = np.array(face)
@@ -43,7 +47,7 @@ while video_capture.isOpened():
     # Display the resulting frame
     cv2.imshow('Video', small_frame)
     skip+=1
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(300) & 0xFF == ord('q'):
         break
 
 # When everything is done, release the capture
